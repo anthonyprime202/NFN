@@ -39,54 +39,43 @@
         }).androidsdk;
 
     in {
-        devShells.${system} = {
-            default = pkgs.mkShell {
-                ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
-                NDK_HOME = "${androidSdk}/libexec/android-sdk/ndk-bundle";
-                JAVA_HOME = "${pkgs.jetbrains.jdk}";
-                GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2";
+        devShells.${system}.default = pkgs.mkShell {
+            ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
+            NDK_HOME = "${androidSdk}/libexec/android-sdk/ndk-bundle";
+            JAVA_HOME = "${pkgs.jetbrains.jdk}";
+            GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2";
 
-                nativeBuildInputs = with pkgs; [
-                    pkg-config gobject-introspection
-                    cargo-tauri
-                    nodejs
-                    (rust-bin.stable.latest.default.override {
-                        extensions = [ "rust-src" "rustfmt" "clippy" "cargo" ];
-                        targets = [
-                            "aarch64-linux-android" 
-                            "armv7-linux-androideabi" 
-                            "i686-linux-android" 
-                            "x86_64-linux-android"
-                        ];
-                    })
-                ];
+            nativeBuildInputs = with pkgs; [
+                pkg-config gobject-introspection
+                cargo-tauri
+                nodejs
+                (rust-bin.stable.latest.default.override {
+                    extensions = [ "rust-src" "rustfmt" "clippy" "cargo" ];
+                    targets = [
+                        "aarch64-linux-android" 
+                        "armv7-linux-androideabi" 
+                        "i686-linux-android" 
+                        "x86_64-linux-android"
+                    ];
+                })
+            ];
 
-                buildInputs = with pkgs; [
-                    alsa-lib.dev
-                    nodejs pnpm
-                    at-spi2-atk
-                    atkmm
-                    cairo
-                    gdk-pixbuf
-                    glib
-                    gtk3
-                    harfbuzz
-                    librsvg
-                    libsoup_3
-                    pango
-                    webkitgtk_4_1
-                    openssl
-                ];
-            };
-
-            android = pkgs.mkShell {
-                ANDROID_HOME = "${androidSdk}/libexec/android-sdk";
-                NDK_HOME = "${androidSdk}/libexec/android-sdk/ndk-bundle";
-                JAVA_HOME = "${pkgs.jetbrains.jdk}";
-                GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2";
-
-                buildInputs = [ androidSdk ];
-            };
+            buildInputs = with pkgs; [
+                alsa-lib.dev
+                nodejs pnpm
+                at-spi2-atk
+                atkmm
+                cairo
+                gdk-pixbuf
+                glib
+                gtk3
+                harfbuzz
+                librsvg
+                libsoup_3
+                pango
+                webkitgtk_4_1
+                openssl
+            ];
         };
     };
 }
