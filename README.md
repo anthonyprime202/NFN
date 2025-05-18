@@ -30,21 +30,6 @@
 - 🎙️ Optional synced lyrics
 - 🌈 Optional visualizer
 
-## 📂 Folder Structure (Planned)
-
-```
-
-src/
-├── views/              # UI screens (PlayerView, LibraryView, etc.)
-├── components/         # Reusable UI components
-├── backend/            # Axum server (API layer)
-├── tauri/              # Tauri commands & platform bindings
-├── state/              # AppState and shared state logic
-├── assets/             # Static assets like cover art, icons
-└── utils/              # Helpers, formatting, etc.
-
-```
-
 ## 🧠 App Architecture
 
 - Frontend talks to backend via **Tauri commands**
